@@ -64,6 +64,9 @@
         What are the three actions you need to get started?
 
       = f.fields_for :actions do |builder|
+        = render "action_fields", f: builder
+
+      = link_to_add_fields "Add Action", f, :actions, false
 
 
     %br/
