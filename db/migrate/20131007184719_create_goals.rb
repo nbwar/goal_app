@@ -3,6 +3,7 @@ class CreateGoals < ActiveRecord::Migration
     create_table :goals do |t|
       t.string :title
       t.string :description
+      t.belongs_to :user
 
       t.timestamps
     end

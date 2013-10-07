@@ -1,0 +1,12 @@
+%h1
+  user goal page
+
+= link_to "Create Goal", new_goal_path
+
+%ul
+  - @goals.each do |goal|
+    %li
+      %h3
+        = goal.title
+
+

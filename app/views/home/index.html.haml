@@ -1,4 +1,7 @@
 =content_for :title, "Goals"
 
-%h1
-  Hello from index
+- if !current_user
+  %h1
+    Hello from index
+- else
+  = render "goals/home_goals"
