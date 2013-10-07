@@ -1,16 +1,11 @@
-#Rails 4 Skeleton#
+#Goal Application MVP#
 
-##Getting Started##
 
-* fork repo
-* clone repo
-* run bundle install
-* set database names in database.yml  (production database optional if pushing to heroku)
+A MVP application for a goal setting application.
 
-* If using SublimeText 2 hit cmnd + shift + f to do a global search and search for 'RailsSkeleton' with replace field of 'YourAppName' and hit replace
+The application is a proof of concept product for the psycoholgy about setting goals and creating motivation in order to achieve them.
 
-* Run the search 1 more time searching for '_rails_skeleton' and replace with '_your_app_name'
 
-* rake db:create
-* rails server
-* go to localhost:3000 and everything should be working
+
+##Created By##
+Nicholas Wargnier
