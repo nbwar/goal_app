@@ -1,9 +1,8 @@
-class CreateMotivations < ActiveRecord::Migration
+class CreateActions < ActiveRecord::Migration
   def change
-    create_table :motivations do |t|
+    create_table :actions do |t|
       t.string :title
       t.text :description
-      t.boolean :positive
       t.belongs_to :goal
 
       t.timestamps

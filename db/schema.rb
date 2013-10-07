@@ -11,14 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131007184906) do
+ActiveRecord::Schema.define(version: 20131007222725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "actions", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "goal_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "beliefs", force: true do |t|
     t.string   "title"
-    t.string   "description"
+    t.text     "description"
     t.boolean  "positive"
     t.integer  "goal_id"
     t.datetime "created_at"
@@ -27,7 +35,7 @@ ActiveRecord::Schema.define(version: 20131007184906) do
 
   create_table "goals", force: true do |t|
     t.string   "title"
-    t.string   "description"
+    t.text     "description"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -35,7 +43,7 @@ ActiveRecord::Schema.define(version: 20131007184906) do
 
   create_table "motivations", force: true do |t|
     t.string   "title"
-    t.string   "description"
+    t.text     "description"
     t.boolean  "positive"
     t.integer  "goal_id"
     t.datetime "created_at"

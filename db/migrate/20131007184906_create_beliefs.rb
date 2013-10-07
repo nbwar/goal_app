@@ -2,7 +2,7 @@ class CreateBeliefs < ActiveRecord::Migration
   def change
     create_table :beliefs do |t|
       t.string :title
-      t.string :description
+      t.text :description
       t.boolean :positive
       t.belongs_to :goal
 

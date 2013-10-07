@@ -55,6 +55,16 @@
 
       = link_to_add_fields "Add Motivation", f, :motivations, false
 
+    .actions_container
+      %h1
+        Actions
+      %p
+        Think about how you can achieve your goal. Think: "What is the first, second and third action I must do to get started"
+      %h3
+        What are the three actions you need to get started?
+
+      = f.fields_for :actions do |builder|
+
 
     %br/
     %br/
