@@ -7,5 +7,5 @@ The application is a proof of concept product for the psycoholgy about setting g
 
 
 
-##Created By##
+##Authored By##
 Nicholas Wargnier
