@@ -5,13 +5,13 @@ common: &common
 
 development:
   <<: *common
-  database: Goals_dev
+  database: goals_dev
 
 test:
   <<: *common
-  database: Goals_test
+  database: goals_test
 
 production:
   <<: *common
-  database: Goals
+  database: goals
 

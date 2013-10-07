@@ -11,10 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130828165155) do
+ActiveRecord::Schema.define(version: 20131007184906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "beliefs", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.boolean  "positive"
+    t.integer  "goal_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "goals", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "motivations", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.boolean  "positive"
+    t.integer  "goal_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "username"
@@ -22,7 +47,6 @@ ActiveRecord::Schema.define(version: 20130828165155) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.text     "bio"
-    t.boolean  "private"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
