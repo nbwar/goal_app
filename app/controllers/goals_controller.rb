@@ -2,6 +2,7 @@ class GoalsController < ApplicationController
 
   def new
     @goal = Goal.new
+    @goal.motivations.build
   end
 
   def create
@@ -10,6 +11,7 @@ class GoalsController < ApplicationController
       flash[:notice] = "Goal Created"
       redirect_to root_path
     else
+      @errors = @goal.errors.full_messages
       render :new
     end
   end
@@ -26,6 +28,7 @@ class GoalsController < ApplicationController
   private
     def goal_params
       params.require(:goal).permit(:title, :description, motivations_attributes: [:id, :title, :description, :positive, :_destroy])
+
     end
 
 end

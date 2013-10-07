@@ -5,5 +5,5 @@ class Goal < ActiveRecord::Base
 
   accepts_nested_attributes_for :motivations, :beliefs, :allow_destroy => true #, reject_if: proc { |attributes| attributes['title'].blank? }
 
-  validates_presence_of :title, :description
+  validates_presence_of :title
 end

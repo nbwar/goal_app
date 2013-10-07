@@ -6,6 +6,10 @@
     A goal is a specific formulation of a dream. Take a moment to turn your dream into a goal. Make it as specific as possible.
   %h3
     What do you want to Achieve?
+  -if @errors
+    -@errors.each do |error|
+      %h3
+        = error
 
   = form_for @goal do |f|
     = f.label :title, "Title"
@@ -22,34 +26,36 @@
       Next
 
 
-    .motivation_container
+    .pos_motivation_container
       %h1
-        Motivation
+        Positive Motivation
       %p
         Think about why this goal is important to you
 
       %h3
         What will you gain when you achieve this goal?
 
+
       = f.fields_for :motivations do |builder|
-        = partial "motivation_fields", f: builder
+        = render partial: "motivation_fields", locals: {f: builder, pos: true}
+
+      = link_to_add_fields "Add Motivation", f, :motivations, true
 
 
 
+    .neg_motivation_container
+      %h1
+        Negative Motivation
 
-        / %h3
-        /   What will you lose when you achieve this goal?
+      %h3
+        What will you lose when you achieve this goal?
 
-        / = builder.label :title, "Title"
-        / %br/
-        / = builder.text_field :title
-        / %br/
-        / = builder.label :description, "Description"
-        / %br/
-        / = builder.text_area :description
-        / = builder.hidden_field :positive, value: false
+      = f.fields_for :motivations do |builder|
+        = render partial: "motivation_fields", locals: {f: builder, pos: false}
 
-    = link_to_add_fields "Add Motivation", f, :motivations
+      = link_to_add_fields "Add Motivation", f, :motivations, false
+
+
     %br/
     %br/
 
