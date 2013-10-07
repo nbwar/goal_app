@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-RailsSkeleton::Application.config.secret_key_base = 'b9c11a1c76684c12d5d4fa7385d7a485719f23505e92ca3778e41abedd4176ca7cae11e64ac4d0b3106d5f1196d193dac5ccf9c58bd70cc0c893f65625713306'
+Goals::Application.config.secret_key_base = 'b9c11a1c76684c12d5d4fa7385d7a485719f23505e92ca3778e41abedd4176ca7cae11e64ac4d0b3106d5f1196d193dac5ccf9c58bd70cc0c893f65625713306'
