@@ -21,6 +21,11 @@ class GoalsController < ApplicationController
     @goal = Goal.find(params[:id])
   end
 
+  def show_goal
+    goal = Goal.find(params["goal"])
+    render :json => render_to_string(:partial => "large_goal", :locals => {goal: goal} ).to_json
+  end
+
   def edit
     @goal = Goal.find(params[:id])
   end
