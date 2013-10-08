@@ -1,12 +1,32 @@
-%h1
-  user goal page
+%section#goal_section
+  .frame
+    .bit-5.left_container
+      %h1
+        My Goals
 
-= link_to "Create Goal", new_goal_path
+      = link_to "Create Goal", new_goal_path
 
-%ul
-  - @goals.each do |goal|
-    %li
-      %h3
-        = goal.title
+      %ul
+        - @goals.each do |goal|
+          %li
+            .goal_block
+              %h3
+                = link_to goal.title, goal
+    .right_container
+      .bit-80
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quisquam quibusdam neque non ipsam illo nisi maiores! Illo, velit iusto quidem pariatur quisquam nisi officiis cumque consequuntur nam quod voluptatum!
 
 
+
+        / .bit-5
+        /   %h2
+        /     Goal
+        / .bit-5
+        /   %h2
+        /     Motivation
+        / .bit-5
+        /   %h2
+        /     Actions
+        / .bit-5
+        /   %h2
+        /     beliefs

@@ -18,6 +18,11 @@ class GoalsController < ApplicationController
   end
 
   def show
+    @goal = Goal.find(params[:id])
+  end
+
+  def edit
+    @goal = Goal.find(params[:id])
   end
 
   def update
@@ -29,7 +34,5 @@ class GoalsController < ApplicationController
   private
     def goal_params
       params.require(:goal).permit(:title, :description, motivations_attributes: [:id, :title, :description, :positive, :_destroy], actions_attributes: [:id, :title, :description, :_destroy])
-
     end
-
 end
