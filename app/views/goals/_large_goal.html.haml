@@ -6,9 +6,25 @@
 .bit-5
   %h2
     Motivation
+  %ul.goal_lists
+    -goal.motivations.each do |motivation|
+      %li
+        =motivation.title
+        =motivation.description
+
 .bit-5
   %h2
     Actions
+  %ul.goal_lists
+    -goal.actions.each do |action|
+      %li
+        =action.title
+        =action.description
 .bit-5
   %h2
     beliefs
+  %ul.goal_lists
+    -goal.beliefs.each do |belief|
+      %li
+        =belief.title
+        =belief.description

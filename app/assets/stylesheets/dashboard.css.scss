@@ -1,6 +1,11 @@
 #goal_section {
-  .left_container {
+  .left_container,
+  .right_container {
     text-align: center;
+  }
+
+  .goal_lists {
+    list-style-type: none;
   }
 
 } // end goal_section

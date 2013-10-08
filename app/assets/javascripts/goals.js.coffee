@@ -22,3 +22,8 @@ goalViewController =
   renderTemplate: (data) ->
     $('.right_container').html(data)
 
+window.onresize = (event) ->
+  if(window.innerWidth < 800)
+    $('.right_container').hide()
+  if(window.innerWidth > 800)
+    $('.right_container').show()
