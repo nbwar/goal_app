@@ -6,11 +6,30 @@
 .bit-5
   %h2
     Motivation
+  %br/
+  %h3
+    Positive
+  %br/
   %ul.goal_lists
-    -goal.motivations.each do |motivation|
+    -goal.motivations.select{|i| i.positive}.each do |motivation|
       %li
-        =motivation.title
+        %strong
+          =motivation.title
+        %br/
         =motivation.description
+      %br/
+  %br/
+  %h3
+    Negative
+  %br/
+  %ul.goal_lists
+    -goal.motivations.reject{|i| i.positive}.each do |motivation|
+      %li
+        %strong
+          =motivation.title
+        %br/
+        =motivation.description
+      %br/
 
 .bit-5
   %h2
