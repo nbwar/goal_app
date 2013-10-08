@@ -6,7 +6,7 @@
 
       = link_to "Create Goal", new_goal_path
 
-      %ul
+      %%ul.list_of_goals
         - @goals.each do |goal|
           %li
             .goal_block
