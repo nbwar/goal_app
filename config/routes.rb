@@ -10,5 +10,6 @@ Goals::Application.routes.draw do
 
   resources :goals
   get '/show_goal' => 'goals#show_goal'
+  post '/add_goal_detail' => 'goals#add_goal_detail'
 
 end

@@ -26,6 +26,12 @@ class GoalsController < ApplicationController
     render :json => render_to_string(:partial => "large_goal", :locals => {goal: goal} ).to_json
   end
 
+  def add_goal_detail
+    goal = Goal.find(params["goal"])
+    object = goal.send(params["klass"].pluralize).create(title: params["title"], description: params["description"])
+    render :json => render_to_string(:partial => "goal_attribute", :locals => { object: object }).to_json
+  end
+
   def edit
     @goal = Goal.find(params[:id])
   end

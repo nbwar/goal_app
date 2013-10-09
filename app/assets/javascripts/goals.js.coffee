@@ -2,7 +2,6 @@ $ ->
   if window.innerWidth <= 800
     $('.right_container').hide();
 
-
   $('form').on 'click', '.add_fields', (e) ->
     e.preventDefault()
     time = new Date().getTime()
@@ -17,13 +16,31 @@ $ ->
     else
       goalId = self.find('a').data('goal-id');
       data = goal: goalId
-      $.ajax '/show_goal',
-        type: 'get',
-        data: data,
-        error: (jqXHR, textStatus, errorThrown) ->
-          console.log(errorThrown)
-        success: (data, textStatus) ->
-          goalViewController.renderTemplate(data, self)
+      goalServerController.requestGoalPartial(data, self)
+
+  $('.goal_block').on 'click', '.add_motivation', (e) ->
+    e.stopPropagation()
+    e.preventDefault()
+    goalViewController.showForm($(this))
+
+  $('.goal_block').on 'click', '.new_form', (e) ->
+    e.stopPropagation()
+
+  $('.goal_block').on 'submit', '.new_form', (e) ->
+    e.preventDefault()
+    data = $(this).serialize()
+    goalServerController.addNew(data, $(this))
+
+  $('.right_container').on 'submit', '.new_form', (e) ->
+    e.preventDefault()
+    data = $(this).serialize()
+    goalServerController.addNew(data, $(this))
+
+  $('.right_container').on 'click', '.add_motivation', (e) ->
+    e.stopPropagation()
+    e.preventDefault()
+    goalViewController.showForm($(this))
+
 
   doit =
   $(window).resize (e) ->
@@ -37,6 +54,8 @@ $ ->
     , 100
 
 
+
+
 smallResize = ->
   $('.right_container').hide()
   goalId = $('.goal_header').data('goal-id')
@@ -47,16 +66,18 @@ largeResize = ->
 
 
 goalViewController =
-  renderTemplate: (data, self) ->
+  renderTemplate: (response, self) ->
     if window.innerWidth > 800
-      this.renderTemplateLarge(data)
+      this.renderTemplateLarge(response)
     else
-      this.renderTemplateSmall(data, self)
-  renderTemplateLarge: (data) ->
-    $('.right_container').html(data)
-  renderTemplateSmall: (data, div) ->
+      this.renderTemplateSmall(response, self)
+  renderTemplateLarge: (response) ->
+    $('.right_container').html(response)
+  renderTemplateSmall: (response, div) ->
+    console.log(div)
     chunk = div.find('.goal_section_container')
-    chunk.html(data)
+    console.log(chunk)
+    chunk.html(response)
     height = chunk.height()
     chunk.slideDown(200);
     div.animate {
@@ -71,4 +92,55 @@ goalViewController =
     self = this
     $('.left_container .list_of_goals').children().each (index, element) ->
       self.collapseGoal($(element).find('.goal_block'))
+  showForm: (link) ->
+    form = link.prev()
+    form.clone().insertBefore(form).show()
+    height = form.height()
+    link.hide()
+    goalViewController.expandGoalContainer(form, height)
+  expandGoalContainer: (el, height) ->
+    goalDiv = el.closest('.goal_block')
+    goalHeight = goalDiv.outerHeight()
+    goalDiv.animate {
+      height: goalHeight + height
+    }, 200
+  unexpandGoalContainer: (el, height) ->
+    goalDiv = el.closest('.goal_block')
+    goalHeight = goalDiv.outerHeight()
+    goalDiv.animate {
+      height: goalHeight - height
+    }, 200
+
+
+
+goalServerController =
+  addNew: (data, self) ->
+    $.ajax '/add_goal_detail',
+      type: 'post',
+      data: data,
+      error: (jqXHR, textStatus, errorThrown) ->
+        console.log(errorThrown)
+      success: (response, textStatus) ->
+        ul = self.prev()
+        ul.append(response)
+        formHeight = self.outerHeight()
+        newHeight = ul.find('li').last().height()
+        height = newHeight - formHeight
+        if window.innerWidth <= 800
+          goalViewController.expandGoalContainer(self, height)
+        self.remove()
+
+  requestGoalPartial: (data, el) ->
+    $.ajax '/show_goal',
+      type: 'get',
+      data: data,
+      error: (jqXHR, textStatus, errorThrown) ->
+        console.log(errorThrown)
+      success: (response, textStatus) ->
+        goalViewController.renderTemplate(response, el)
+
+
+
+
+
 
