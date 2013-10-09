@@ -1,76 +1,75 @@
-.new_goal_container
+.new_form_goal_wrapper
   %h1
     New Goal
 
-  %p
-    A goal is a specific formulation of a dream. Take a moment to turn your dream into a goal. Make it as specific as possible.
-  %h3
-    What do you want to Achieve?
-  -if @errors
-    -@errors.each do |error|
-      %h3
-        = error
+  %ul.form_list
+    = form_for @goal do |f|
+      %li.visible.first
+        .goal_container
+          %p
+            A goal is a specific formulation of a dream. Take a moment to turn your dream into a goal. Make it as specific as possible.
+          %h3
+            What do you want to Achieve?
+          = f.label :title, "Title"
+          %br/
+          = f.text_field :title
+          %br/
+          %br/
+          = f.label :description, "Description"
+          %br/
+          = f.text_area :description
+          %br/
 
-  = form_for @goal do |f|
-    = f.label :title, "Title"
-    %br/
-    = f.text_field :title
-    %br/
-    %br/
-    = f.label :description, "Description"
-    %br/
-    = f.text_area :description
-    %br/
+      %li{style: "display:none"}
+        .pos_motivation_container
 
-    %button.next
-      Next
+          %h1
+            Positive Motivation
+          %p
+            Think about why this goal is important to you
 
-
-    .pos_motivation_container
-      %h1
-        Positive Motivation
-      %p
-        Think about why this goal is important to you
-
-      %h3
-        What will you gain when you achieve this goal?
+          %h3
+            What will you gain when you achieve this goal?
 
 
-      = f.fields_for :motivations do |builder|
-        = render partial: "motivation_fields", locals: {f: builder, pos: true}
+          = f.fields_for :motivations do |builder|
+            = render partial: "motivation_fields", locals: {f: builder, pos: true}
 
-      = link_to_add_fields "Add Motivation", f, :motivations, true
+          = link_to_add_fields "Add Motivation", f, :motivations, true
 
+      %li{style: "display:none"}
+        .neg_motivation_container
+          %h1
+            Negative Motivation
 
+          %h3
+            What will you lose when you achieve this goal?
 
-    .neg_motivation_container
-      %h1
-        Negative Motivation
+          = f.fields_for :motivations do |builder|
+            = render partial: "motivation_fields", locals: {f: builder, pos: false}
 
-      %h3
-        What will you lose when you achieve this goal?
+          = link_to_add_fields "Add Motivation", f, :motivations, false
 
-      = f.fields_for :motivations do |builder|
-        = render partial: "motivation_fields", locals: {f: builder, pos: false}
+      %li.last{style: "display:none"}
+        .actions_container
+          %h1
+            Actions
+          %p
+            Think about how you can achieve your goal. Think: "What is the first, second and third action I must do to get started"
+          %h3
+            What are the three actions you need to get started?
 
-      = link_to_add_fields "Add Motivation", f, :motivations, false
+          = f.fields_for :actions do |builder|
+            = render "action_fields", f: builder
 
-    .actions_container
-      %h1
-        Actions
-      %p
-        Think about how you can achieve your goal. Think: "What is the first, second and third action I must do to get started"
-      %h3
-        What are the three actions you need to get started?
+          = link_to_add_fields "Add Action", f, :actions
 
-      = f.fields_for :actions do |builder|
-        = render "action_fields", f: builder
+          %br/
+          = f.submit "Create"
 
-      = link_to_add_fields "Add Action", f, :actions
+      %button.prev{style: "display:none"}
+        Back
 
-
-    %br/
-    %br/
-
-    = f.submit "Create"
+      %button.next
+        Next
 

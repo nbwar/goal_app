@@ -2,12 +2,6 @@ $ ->
   if window.innerWidth <= 800
     $('.right_container').hide();
 
-  $('form').on 'click', '.add_fields', (e) ->
-    e.preventDefault()
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $(this).before($(this).data('fields').replace(regexp, time))
-
   $('.goal_block').on 'click', (e) ->
     e.preventDefault()
     self = $(this);
