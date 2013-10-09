@@ -18,7 +18,7 @@ $ ->
       data = goal: goalId
       goalServerController.requestGoalPartial(data, self)
 
-  $('.goal_block').on 'click', '.add_motivation', (e) ->
+  $('.goal_block').on 'click', '.add_detail', (e) ->
     e.stopPropagation()
     e.preventDefault()
     goalViewController.showForm($(this))
@@ -36,7 +36,7 @@ $ ->
     data = $(this).serialize()
     goalServerController.addNew(data, $(this))
 
-  $('.right_container').on 'click', '.add_motivation', (e) ->
+  $('.right_container').on 'click', '.add_detail', (e) ->
     e.stopPropagation()
     e.preventDefault()
     goalViewController.showForm($(this))
@@ -72,9 +72,7 @@ goalViewController =
   renderTemplateLarge: (response) ->
     $('.right_container').html(response)
   renderTemplateSmall: (response, div) ->
-    console.log(div)
     chunk = div.find('.goal_section_container')
-    console.log(chunk)
     chunk.html(response)
     height = chunk.height()
     chunk.slideDown(200);
@@ -127,7 +125,7 @@ goalServerController =
           # height = formHeight - newHeight
           # console.log(height);
           # goalViewController.expandGoalContainer(self, height)
-        self.siblings('.add_motivation').show()
+        self.siblings('.add_detail').show()
         self.remove()
 
   requestGoalPartial: (data, el) ->
@@ -138,9 +136,3 @@ goalServerController =
         console.log(errorThrown)
       success: (response, textStatus) ->
         goalViewController.renderTemplate(response, el)
-
-
-
-
-
-

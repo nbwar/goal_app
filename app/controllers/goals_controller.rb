@@ -25,6 +25,10 @@ class GoalsController < ApplicationController
   def add_goal_detail
     goal = Goal.find(params["goal"])
     object = goal.send(params["klass"].pluralize).create(title: params["title"], description: params["description"])
+    if object.attributes.include?('positive')
+      object.update_attributes(positive: params["positive"])
+      object.save
+    end
     render :json => render_to_string(:partial => "goal_attribute", :locals => { object: object }).to_json
   end
 

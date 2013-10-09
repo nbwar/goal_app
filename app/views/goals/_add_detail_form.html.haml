@@ -1,0 +1,13 @@
+= form_tag '#', :class => "new_form", :style => "display:none" do
+  = label_tag :title, "Title"
+  %br/
+  = text_field_tag :title
+  %br/
+  = label_tag :description, "Description"
+  %br/
+  = text_area_tag :description
+  = hidden_field_tag :klass, klass
+  = hidden_field_tag :positive, positive
+  = hidden_field_tag :goal, goal.id
+  %br/
+  = submit_tag "Add"

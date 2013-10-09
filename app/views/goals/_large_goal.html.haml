@@ -1,8 +1,9 @@
 .bit-5
   %h2.goal_header{:data => {goal_id: goal.id}}
     Goal
-  =goal.title
-  =goal.description
+  %ul.goal_lists
+    = render "goal_attribute", object: goal
+
 .bit-5
   %h2
     Motivation
@@ -13,8 +14,10 @@
   %ul.goal_lists
     -goal.motivations.select{|i| i.positive}.each do |motivation|
       = render "goal_attribute", object: motivation
-  %br/
-  = link_to 'Add Positive Motivation', '#', :class => "add_motivation"
+
+  = render partial: "add_detail_form", locals: { klass: 'motivation', positive: true, goal: goal}
+
+  = link_to 'Add Positive Motivation', '#', :class => "add_detail"
   %br/
   %br/
   %h3
@@ -24,21 +27,9 @@
     -goal.motivations.reject{|i| i.positive}.each do |motivation|
       = render "goal_attribute", object: motivation
 
-  = form_tag '#', :class => "new_form", :style => "display:none" do
-    = label_tag :title, "Title"
-    %br/
-    = text_field_tag :title
-    %br/
-    = label_tag :description, "Description"
-    %br/
-    = text_area_tag :description
-    = hidden_field_tag :klass, 'motivation'
-    = hidden_field_tag :positive, false
-    = hidden_field_tag :goal, goal.id
-    %br/
-    = submit_tag "Add"
+  = render partial: "add_detail_form", locals: { klass: 'motivation', positive: false, goal: goal}
 
-  = link_to 'Add Negative Motivation', '#', :class => "add_motivation"
+  = link_to 'Add Negative Motivation', '#', :class => "add_detail"
 
 
 .bit-5
@@ -46,14 +37,20 @@
     Actions
   %ul.goal_lists
     -goal.actions.each do |action|
-      %li
-        =action.title
-        =action.description
+      = render "goal_attribute", object: action
+  = render partial: "add_detail_form", locals: { klass: 'action', positive: false, goal: goal}
+
+  = link_to 'Add Action', '#', :class => "add_detail"
+
+
 .bit-5
   %h2
     beliefs
   %ul.goal_lists
     -goal.beliefs.each do |belief|
-      %li
-        =belief.title
-        =belief.description
+      = render "goal_attribute", object: belief
+  = render partial: "add_detail_form", locals: { klass: 'belief', positive: false, goal: goal}
+
+  = link_to 'Add Belief', '#', :class => "add_detail"
+
+
