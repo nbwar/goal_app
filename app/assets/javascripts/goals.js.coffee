@@ -49,6 +49,7 @@ $ ->
 
 
 smallResize = ->
+  $('.right_container').html('')
   $('.right_container').hide()
   goalId = $('.goal_header').data('goal-id')
   $('.list_of_goals a[data-goal-id="' + goalId + '"]').closest('.goal_block')
