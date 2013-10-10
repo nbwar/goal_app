@@ -32,7 +32,11 @@ class GoalsController < ApplicationController
     render :json => render_to_string(:partial => "goal_attribute", :locals => { object: object }).to_json
   end
 
-  def update
+  def edit_object
+    object = params["klass"].constantize.find(params["object"])
+    object.update_attributes(title: params["title"], description: params["description"])
+    object.save
+    render :json => render_to_string(:partial => "goal_attribute", :locals => { object: object }).to_json
   end
 
   def destroy

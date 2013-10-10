@@ -1,6 +1,10 @@
-%li
-  %strong
-    =object.title
-  %br/
-  =object.description
+%li{data: {klass: object.class, id: object.id}}
+
+  %p.title
+    %strong
+      =object.title
+  %p.description
+    =object.description
+  = link_to 'edit', '#', :class => "edit"
+
 %br/

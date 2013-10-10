@@ -4,6 +4,20 @@
   %ul.goal_lists
     = render "goal_attribute", object: goal
 
+  = form_tag '#', :class => "edit_form", :id => "orig_edit", :style => "display:none" do
+    = label_tag :title, "Title"
+    %br/
+    = text_field_tag :title, nil, :class => 'title_field'
+    %br/
+    = label_tag :description, "Description"
+    %br/
+    = text_area_tag :description, nil, :class => 'desc_field'
+    = hidden_field_tag :klass, nil, :class => 'klass'
+    = hidden_field_tag :object, nil, :class => 'object'
+    %br/
+    = submit_tag "Update", :class => 'update'
+
+
 .bit-5
   %h2
     Motivation
