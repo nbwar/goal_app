@@ -114,12 +114,6 @@ goalServerController =
       success: (response, textStatus) ->
         ul = self.prev()
         ul.append(response)
-        # if window.innerWidth <= 800
-          # formHeight = self.innerHeight()
-          # newHeight = ul.find('li').last().innerHeight()
-          # height = formHeight - newHeight
-          # console.log(height);
-          # goalViewController.expandGoalContainer(self, height)
         self.siblings('.add_detail').show()
         self.remove()
 

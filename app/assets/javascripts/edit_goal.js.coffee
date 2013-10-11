@@ -26,6 +26,7 @@ $ ->
 editController =
   renderForm: (link)->
     $li = link.parent()
+    liHeight = $li.innerHeight()
     title = $li.find('.title').text().trim()
     desc = $li.find('.description').text().trim()
     klass = $li.data('klass')
@@ -44,7 +45,9 @@ editController =
     descField.val(desc)
     klassField.val(klass)
     objectField.val(object)
-
+    if window.innerWidth <= 800
+      formHeight = $edit_form.outerHeight()
+      editController.expandContainer($edit_form, formHeight, liHeight )
     $edit_form.show()
 
   editGoal: (form) ->
@@ -55,8 +58,27 @@ editController =
       error: (jqXHR, textStatus, errorThrown) ->
         console.log(errorThrown)
       success: (response, textStatus) ->
-        form.parent().html(response)
+        formHeight = form.outerHeight()
+        li = form.parent()
+        li.html(response)
+        liHeight = li.innerHeight()
+        editController.collapseContainer(li, formHeight, liHeight)
         form.remove()
+
+  expandContainer: (el, formHeight, liHeight) ->
+    goalDiv = el.closest('.goal_block')
+    goalHeight = goalDiv.outerHeight()
+    goalDiv.animate {
+      height: goalHeight - liHeight + formHeight
+    }, 200
+
+  collapseContainer: (el, formHeight, liHeight) ->
+    goalDiv = el.closest('.goal_block')
+    goalHeight = goalDiv.outerHeight()
+    goalDiv.animate {
+      height: goalHeight - formHeight + liHeight
+    }, 200
+
 
 
 
